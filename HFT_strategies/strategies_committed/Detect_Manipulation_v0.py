@@ -121,8 +121,8 @@ class ManipulationDetection():
 
 
 if __name__ == '__main__':
-    df = pd.read_csv('/home/thanhnhan/Desktop/HFT_Strategy/HFT/VN30F1M.csv', index_col=0, parse_dates=['Date'])
-    MD = ManipulationDetection(df)
+    df = pd.read_csv('/home/thanhnhan/Desktop/pthnhan_quant/HFT_strategies/HFT/VN30F1M.csv', index_col=0, parse_dates=['Date'])
+    # MD = ManipulationDetection(df)
     # i=200
     # pump_and_dump = []
     # while i <8000:
@@ -133,10 +133,10 @@ if __name__ == '__main__':
     #     i+=1
     #
     # print(pump_and_dump)
-    plt.plot(df[0:8000]['ask_price'])
-    plt.show()
+    # plt.plot(df[0:8000]['ask_price'])
+    # plt.show()
 
     # print(MD.detect_bump_and_dump(232,432))
-    # print(tabulate(df[0:200], tablefmt='pipe', headers='keys'))
+    print(tabulate(df[0:200], tablefmt='pipe', headers='keys'))
     # print(tabulate(df[200:555], tablefmt='pipe', headers='keys'))
     # print(tabulate(df[555:755], tablefmt='pipe', headers='keys'))

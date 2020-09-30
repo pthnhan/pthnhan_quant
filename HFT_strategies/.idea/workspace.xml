@@ -1,20 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8ad95d7-9d6e-4dab-8e9c-7d42983dbd61" name="Default Changelist" comment="" />
+    <list default="true" id="d8ad95d7-9d6e-4dab-8e9c-7d42983dbd61" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1hob81cTPFjMab3bNLnmZTxtemm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/strategies" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.Detect_Manipulation">
     <configuration name="Detect_Manipulation" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -30,6 +67,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Detect_Manipulation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Detect_Manipulation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HFT_Strategy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/miniconda3/envs/dev/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/strategies" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/strategies/Detect_Manipulation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -59,12 +117,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="get_live_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HFT_Strategy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/miniconda3/envs/dev/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/strategies" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/strategies/get_live_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.Detect_Manipulation" />
       <item itemvalue="Python.candle_AM" />
+      <item itemvalue="Python.get_live_data" />
+      <item itemvalue="Python.Detect_Manipulation" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Detect_Manipulation" />
+        <item itemvalue="Python.get_live_data" />
         <item itemvalue="Python.candle_AM" />
       </list>
     </recent_temporary>
@@ -83,30 +165,50 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="192" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600926123590">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2333" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601283873373">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="413" y="192" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600926123590" />
-    <state width="1899" height="313" key="GridCell.Tab.0.bottom" timestamp="1600930275039">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2333" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601283873373" />
+    <state x="2600" y="333" width="570" height="384" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601283804906">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2600" y="333" width="570" height="384" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601283804906" />
+    <state width="1869" height="298" key="GridCell.Tab.0.bottom" timestamp="1601285945779">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="313" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600930275039" />
+    <state width="1869" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601285945779" />
     <state width="1889" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600714699165" />
-    <state width="1899" height="313" key="GridCell.Tab.0.center" timestamp="1600930275039">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1869" height="298" key="GridCell.Tab.0.center" timestamp="1601285945779">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="313" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600930275039" />
+    <state width="1869" height="298" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601285945779" />
     <state width="1889" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600714699165" />
-    <state width="1899" height="313" key="GridCell.Tab.0.left" timestamp="1600930275038">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1869" height="298" key="GridCell.Tab.0.left" timestamp="1601285945779">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="313" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600930275038" />
+    <state width="1869" height="298" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601285945779" />
     <state width="1889" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600714699165" />
-    <state width="1899" height="313" key="GridCell.Tab.0.right" timestamp="1600930275039">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1869" height="298" key="GridCell.Tab.0.right" timestamp="1601285945779">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="313" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600930275039" />
+    <state width="1869" height="298" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601285945779" />
     <state width="1889" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600714699165" />
     <state width="1879" height="328" key="GridCell.Tab.1.bottom" timestamp="1600857474459">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -124,9 +226,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1879" height="328" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600857474459" />
-    <state x="618" y="250" width="672" height="678" key="search.everywhere.popup" timestamp="1600768621273">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2538" y="260" width="672" height="705" key="search.everywhere.popup" timestamp="1601283755457">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="618" y="250" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600768621273" />
+    <state x="2538" y="260" width="672" height="705" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601283755457" />
   </component>
 </project>

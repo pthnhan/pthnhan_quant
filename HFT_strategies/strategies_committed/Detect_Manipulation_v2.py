@@ -55,8 +55,7 @@ class ManipulationDetection():
 
     #Check pump and dump
     def detect_pump_and_dump(self):
-        dumping = []
-        pumping = []
+        detect = ""
         vol_buy_cancelled_at_t = self.vol_buy_cancelled[-2]
         vol_buy_matched = MD.getPbidVbidmatched()[1][0:len(self.df)-1]
         if len(vol_buy_matched) >0:
@@ -68,13 +67,13 @@ class ManipulationDetection():
                     price_sell_min_matched_t_add_1 = min(MD.getPsellVsellMatched()[0][0:len(self.df)])
                     # Check the second condition of dumping state
                     if price_sell_max_matched_t-price_sell_min_matched_t_add_1 > self.params["threshold2"]:
-                        dumping.append(self.df[-1]['Date'])
+                        detect = "dump"
                         price_bid_max_matched_t_minus_1 = max(MD.getPbidVbidmatched()[0][0: len(self.df)-2])
                         price_bid_min_matched_t_minus_4 = min(MD.getPbidVbidmatched()[0][0: len(self.df)-5])
                         # Check the third condition of dumping state
                         if price_bid_max_matched_t_minus_1 - price_bid_min_matched_t_minus_4 > self.params["threshold3"]:
-                            pumping.append(self.df[-1]['Date'])
-        return dumping, pumping
+                            detect = "pump and dump"
+        return detect
 
 
     # Check spoofing
@@ -84,7 +83,6 @@ class ManipulationDetection():
 
 
 if __name__ == '__main__':
-    # df = pd.read_csv('/home/thanhnhan/Desktop/HFT_Strategy/HFT/VN30F1M.csv', index_col=0, parse_dates=['Date'])
     data = []
     connector = get_live_data.HFTExternalConnector("VN30F1M", data)
     df = []
@@ -92,6 +90,8 @@ if __name__ == '__main__':
     last_matched_vol = []
     vol_buy_cancelled = []
     l = 200
+    dump = []
+    pump_and_dump =[]
     while True:
         snapshot = connector.get_orderbook_snapshot()
         if snapshot != None:
@@ -109,10 +109,12 @@ if __name__ == '__main__':
             vol_buy_cancelled = vol_buy_cancelled[-l:]
             MD = ManipulationDetection(df, last_matched_price, last_matched_vol, vol_buy_cancelled)
             detect = MD.detect_pump_and_dump()
-            if len(detect[0])>0:
-                print(f"Detected dumping state at the following times: {detect[0]}")
-            if len(detect[1])>0:
-                print(f"Detected pumping and dumping state at the following times: {detect[1]}")
+            if detect == "dump":
+                dump.append(df[-1]['Date'])
+                print(f"Detected dumping state at the following times: {dump}")
+            if detect == "pump and dump":
+                pump_and_dump.append(df[-1]['Date'])
+                print(f"Detected pumping and dumping state at the following times: {pump_and_dump}")
 
     # print(MD.detect_bump_and_dump(232,432))
     # print(tabulate(df[0:200], tablefmt='pipe', headers='keys'))
