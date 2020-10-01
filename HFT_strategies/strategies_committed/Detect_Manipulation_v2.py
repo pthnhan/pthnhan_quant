@@ -81,7 +81,6 @@ class ManipulationDetection():
         pass
 
 
-
 if __name__ == '__main__':
     data = []
     connector = get_live_data.HFTExternalConnector("VN30F1M", data)
@@ -90,8 +89,10 @@ if __name__ == '__main__':
     last_matched_vol = []
     vol_buy_cancelled = []
     l = 200
+    check = []
     dump = []
     pump_and_dump =[]
+    s=0
     while True:
         snapshot = connector.get_orderbook_snapshot()
         if snapshot != None:
@@ -100,6 +101,8 @@ if __name__ == '__main__':
                 last_matched_price.append(snapshot['last_matched_price'])
                 last_matched_vol.append(snapshot['last_matched_vol'])
                 vol_buy_cancelled.append(snapshot['cancelled_bid'])
+                ask_price = snapshot['ask_price']
+                bid_price = snapshot['bid_price']
                 print(snapshot['Date'])
 
         if len(df) > l:
@@ -110,11 +113,25 @@ if __name__ == '__main__':
             MD = ManipulationDetection(df, last_matched_price, last_matched_vol, vol_buy_cancelled)
             detect = MD.detect_pump_and_dump()
             if detect == "dump":
-                dump.append(df[-1]['Date'])
-                print(f"Detected dumping state at the following times: {dump}")
+                check.append("dump")
+                print(f"Detected dumping state at the following times!")
+                if check[-3:] == ["dump", "dump", "dump"] and abs(len(dump) + 1 - len(pump_and_dump) < 2):
+                    print(f"bid_price: {bid_price}")
+                    dump.append(bid_price)
+                    print(f"dump : {dump}")
+                    print(f"pump and dump: {pump_and_dump}")
+                    s += bid_price
+                    print(f"s: {s}")
             if detect == "pump and dump":
-                pump_and_dump.append(df[-1]['Date'])
-                print(f"Detected pumping and dumping state at the following times: {pump_and_dump}")
-
+                check.append("pump and dump")
+                print(f"Detected pumping and dumping state at the following times!")
+                if check[-3:] == ["pump and dump", "pump and dump", "pump and dump"] and abs(
+                        len(pump_and_dump) + 1 - len(dump)) < 2:
+                    print(f"ask_price: {ask_price}")
+                    pump_and_dump.append(ask_price)
+                    print(f"dump : {dump}")
+                    print(f"pump and dump: {pump_and_dump}")
+                    s -= ask_price
+                    print(f"s: {s}")
     # print(MD.detect_bump_and_dump(232,432))
     # print(tabulate(df[0:200], tablefmt='pipe', headers='keys'))
