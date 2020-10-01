@@ -11,8 +11,8 @@ class ManipulationDetection():
     def __init__(self, df):
         self.params = dict(
         threshold1 = 0.5,
-        threshold2 =  1.5,
-        threshold3 = 2,
+        threshold2 =  1,
+        threshold3 = 1.5,
     )
         self.df = df
 
@@ -56,28 +56,6 @@ class ManipulationDetection():
     def detect_pump_and_dump(self, start, end):
         df = self.df[start:end]
         vol_buy_cancelled = df['cancelled_bid']
-        # while count <len(df)-1:
-        #     vol_buy_cancelled_at_t = vol_buy_cancelled.iloc[count]
-        #     vol_buy_matched = MD.getPbidVbidmatched(0,count)[1]
-        #     # if len(MD.getPsellVsellMatched(0, count)[0]) > 0:
-        #     #     price_sell_max_matched_t = max(MD.getPsellVsellMatched(0,count)[0])
-        #     #     price_sell_min_matched_t_add_1 = min(MD.getPsellVsellMatched(0,count+1)[0])
-        #     #     print(f"P_sell_max_matched_t: {price_sell_max_matched_t}")
-        #     #     print(f"P_sell_min_matched_t_add_1: {price_sell_min_matched_t_add_1}")
-        #     if len(vol_buy_matched) >0:
-        #         mean_vol_buy_matched_t = np.mean(vol_buy_matched)
-        #         if vol_buy_cancelled_at_t > mean_vol_buy_matched_t * self.params["threshold1"]:
-        #             if len(MD.getPsellVsellMatched(0, count)[0]) > 0:
-        #                 price_sell_max_matched_t = max(MD.getPsellVsellMatched(0, count)[0])
-        #                 price_sell_min_matched_t_add_1 = min(MD.getPsellVsellMatched(0, count + 1)[0])
-        #                 print(f"P_sell_max_matched_t: {price_sell_max_matched_t}")
-        #                 print(f"P_sell_min_matched_t_add_1: {price_sell_min_matched_t_add_1}")
-        #                 if price_sell_max_matched_t-price_sell_min_matched_t_add_1 > self.params["threshold2"]:
-        #                     dump.append(start+count)
-        #                     print(f'count_detected: {start+count}')
-        #                     break
-        #     count+=1
-        #     print(f"count: {start+count}")
         detect = ""
         vol_buy_cancelled_at_t = vol_buy_cancelled.iloc[-2]
         vol_buy_matched = MD.getPbidVbidmatched(start, end-1)[1]
@@ -119,104 +97,110 @@ class ManipulationDetection():
 if __name__ == '__main__':
     df = pd.read_csv('/home/thanhnhan/Desktop/pthnhan_quant/HFT_strategies/strategies/VN30F1M.csv', index_col="Date", parse_dates=['Date'])
     df = df[df.index.isnull() == False]
-    df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-29"])]
+    df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-30"])]
     # print(df[-len(df_date):-3000])
-    index =[]
     MD = ManipulationDetection(df)
-    # l=-len(df_date)
-    # s = 0
-    # check = []
-    # dump = []
-    # pump_and_dump = []
-    # while l < 0:
-    #     print(l)
-    #     bid_price = df_date[l - 200:l]["bid_price"]
-    #     ask_price = df_date[l - 200:l]["ask_price"]
-    #     detect = MD.detect_pump_and_dump(l - 200, l)
-    #     if detect == "dump":
-    #         check.append("dump")
-    #         print(f"Detected dumping state at the following times!")
-    #         if check[-3:] == ["dump", "dump", "dump"] and abs(len(dump) + 1 - len(pump_and_dump) < 2):
-    #             bidprice = bid_price[-1]
-    #             print(f"bid_price: {bidprice}")
-    #             dump.append(bidprice)
-    #             print(f"dump : {dump}")
-    #             print(f"pump and dump: {pump_and_dump}")
-    #             s += bidprice
-    #             print(f"s: {s}")
-    #     if detect == "pump and dump":
-    #         check.append("pump and dump")
-    #         print(f"Detected pumping and dumping state at the following times!")
-    #         if check[-3:] == ["pump and dump", "pump and dump", "pump and dump"] and abs(
-    #                 len(pump_and_dump) + 1 - len(dump)) < 2:
-    #             askprice = ask_price[-1]
-    #             print(f"ask_price: {askprice}")
-    #             pump_and_dump.append(askprice)
-    #             print(f"dump : {dump}")
-    #             print(f"pump and dump: {pump_and_dump}")
-    #             s -= askprice
-    #             print(f"s: {s}")
-    #     l += 1
-    # if s > 800:
-    #     print(s-bidprice)
-    # elif s <-800:
-    #     print(s+askprice)
-    # else: print(s)
-    # print(f"sell: {dump}")
-    # print(f"buy: {pump_and_dump}")
+    l=-len(df_date)
+    s = 0
+    check = []
+    dump = []
+    pump_and_dump = []
+    while l < 0:
+        print(l)
+        bid_price = df_date[l - 200:l]["bid_price"]
+        ask_price = df_date[l - 200:l]["ask_price"]
+        detect = MD.detect_pump_and_dump(l - 200, l)
+        if detect == "dump":
+            check.append("dump")
+            print(f"Detected dumping state at the following times!")
+            if check[-3:] == ["dump", "dump", "dump"] and abs(len(dump) + 1 - len(pump_and_dump) < 2):
+                bidprice = bid_price[-1]
+                print(f"bid_price: {bidprice}")
+                dump.append(bidprice)
+                print(f"dump : {dump}")
+                print(f"pump and dump: {pump_and_dump}")
+                s += bidprice
+                print(f"s: {s}")
+        if detect == "pump and dump":
+            check.append("pump and dump")
+            print(f"Detected pumping and dumping state at the following times!")
+            if check[-3:] == ["pump and dump", "pump and dump", "pump and dump"] and abs(
+                    len(pump_and_dump) + 1 - len(dump)) < 2:
+                askprice = ask_price[-1]
+                print(f"ask_price: {askprice}")
+                pump_and_dump.append(askprice)
+                print(f"dump : {dump}")
+                print(f"pump and dump: {pump_and_dump}")
+                s -= askprice
+                print(f"s: {s}")
+        l += 1
+    if s > 800:
+        print(s-bidprice)
+    elif s <-800:
+        print(s+askprice)
+    else: print(s)
+    print(f"sell: {dump}")
+    print(f"buy: {pump_and_dump}")
 
-    for i in range(1,31):
-        if i<10:
-            df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-0"+str(i)])]
-        if 10<=i<20:
-            df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-1"+str(i%10)])]
-        if 20<=i<30:
-            df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-2"+str(i%10)])]
-        if 30<=i:
-            df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-3"+str(i%10)])]
+    # index = []
+    # for i in range(1,31):
+    #     if i<10:
+    #         df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-0"+str(i)])]
+    #     if 10<=i<20:
+    #         df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-1"+str(i%10)])]
+    #     if 20<=i<30:
+    #         df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-2"+str(i%10)])]
+    #     if 30<=i:
+    #         df_date = df[df.index.strftime("%Y-%m-%d").isin(["2020-09-3"+str(i%10)])]
+    #
+    #     MD = ManipulationDetection(df_date)
+    #     l=200
+    #     s = 0
+    #     check = []
+    #     dump = []
+    #     pump_and_dump = []
+    #     while l <len(df_date):
+    #         bid_price = df_date[l-200:l]["bid_price"]
+    #         ask_price = df_date[l-200:l]["ask_price"]
+    #         detect = MD.detect_pump_and_dump(l - 200, l)
+    #         if detect == "dump":
+    #             check.append("dump")
+    #             print(f"Detected dumping state at the following times!")
+    #             if check[-3:] == ["dump", "dump", "dump"] and abs(len(dump) + 1 - len(pump_and_dump) < 2):
+    #                 bidprice = bid_price[-1]
+    #                 print(f"bid_price: {bidprice}")
+    #                 dump.append(bidprice)
+    #                 print(f"dump : {dump}")
+    #                 print(f"pump and dump: {pump_and_dump}")
+    #                 s += bidprice
+    #                 print(f"s: {s}")
+    #         if detect == "pump and dump":
+    #             check.append("pump and dump")
+    #             print(f"Detected pumping and dumping state at the following times!")
+    #             if check[-3:] == ["pump and dump", "pump and dump", "pump and dump"] and abs(
+    #                     len(pump_and_dump) + 1 - len(dump)) < 2:
+    #                 askprice = ask_price[-1]
+    #                 print(f"ask_price: {askprice}")
+    #                 pump_and_dump.append(askprice)
+    #                 print(f"dump : {dump}")
+    #                 print(f"pump and dump: {pump_and_dump}")
+    #                 s -= askprice
+    #                 print(f"s: {s}")
+    #         l+=1
+    #     if s > 800:
+    #         index.append(s-bidprice)
+    #     elif s <-800:
+    #         index.append(s+askprice)
+    #     else: index.append(s)
+    # print(index)
+    # index_ = []
+    # index_.append(index[0])
+    # for i in range(1, len(index)):
+    #     index_.append(index_[-1]+index[i])
+    # plt.plot(index_)
+    # plt.show()
 
-        MD = ManipulationDetection(df_date)
-        l=200
-        s = 0
-        check = []
-        dump = []
-        pump_and_dump = []
-        while l <len(df_date):
-            bid_price = df_date[l-200:l]["bid_price"]
-            ask_price = df_date[l-200:l]["ask_price"]
-            detect = MD.detect_pump_and_dump(l - 200, l)
-            if detect == "dump":
-                check.append("dump")
-                print(f"Detected dumping state at the following times!")
-                if check[-3:] == ["dump", "dump", "dump"] and abs(len(dump) + 1 - len(pump_and_dump) < 2):
-                    bidprice = bid_price[-1]
-                    print(f"bid_price: {bidprice}")
-                    dump.append(bidprice)
-                    print(f"dump : {dump}")
-                    print(f"pump and dump: {pump_and_dump}")
-                    s += bidprice
-                    print(f"s: {s}")
-            if detect == "pump and dump":
-                check.append("pump and dump")
-                print(f"Detected pumping and dumping state at the following times!")
-                if check[-3:] == ["pump and dump", "pump and dump", "pump and dump"] and abs(
-                        len(pump_and_dump) + 1 - len(dump)) < 2:
-                    askprice = ask_price[-1]
-                    print(f"ask_price: {askprice}")
-                    pump_and_dump.append(askprice)
-                    print(f"dump : {dump}")
-                    print(f"pump and dump: {pump_and_dump}")
-                    s -= askprice
-                    print(f"s: {s}")
-            l+=1
-        if s > 800:
-            index.append(s-bidprice)
-        elif s <-800:
-            index.append(s+askprice)
-        else: index.append(s)
-    for n in range(0,30):
-        print(f"Ngay {n+1}/09/2020: {index[n]}")
-    print(index)
+
     #
     # print(pump_and_dump)
     # plt.plot(df[0:8000]['ask_price'])
